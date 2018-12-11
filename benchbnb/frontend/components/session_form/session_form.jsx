@@ -23,6 +23,18 @@ class SessionForm extends React.Component {
     return e => this.setState({ [field]: e.target.value } )
   }
 
+  renderErrors() {
+    return (
+      <ul>
+        {this.props.errors.map( (error, i) => {
+          return (
+            <li key={`error-${i}`}> {error} </li>
+          )
+        })}
+      </ul>
+    );
+  }
+
   render() {
 
     let otherLink;
@@ -35,6 +47,7 @@ class SessionForm extends React.Component {
     return (
       <div>
         <h1>{this.props.formType}</h1>
+        {this.renderErrors()}
         <form onSubmit={this.handleSubmit}>
           <label> Username:
             <input onChange={this.update("username")} type="text" value={this.state.username} />
